@@ -40,7 +40,6 @@ gcloud container clusters get-credentials $CLUSTER_NAME
 ``` bash
 snakemake \
     -j 16 \
-    --keep-remote \
     --kubernetes \
     --default-remote-provider GS \
     --default-remote-prefix ncbi-ccle-data/SRA \

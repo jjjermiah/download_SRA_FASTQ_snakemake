@@ -16,7 +16,7 @@ rule all:
     input:
         # expand("input/{sra}.txt", sra=SRAlist),
         # expand("downloads/{sra}/", sra=SRAlist)
-        expand("processed/{sra}", sra=SRAlist)
+        # expand("processed/{sra}", sra=SRAlist)
         # dir=GS.remote(expand("ncbi-ccle-data/test/{sra}", sra=SRAlist))
 
 rule download_SRA:
