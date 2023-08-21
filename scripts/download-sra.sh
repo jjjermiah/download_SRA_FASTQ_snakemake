@@ -23,11 +23,11 @@ vdb-config --set /repository/user/ad/public/root=downloadsDir
 echo ""
 
 
-echo -e "snakemake_input is ${snakemake_input} \n"
-echo -e "snakemake output is ${snakemake_output['dir']} \n"
+# echo -e "snakemake_input is ${snakemake_input} \n"
+# echo -e "snakemake output is ${snakemake_output['dir']} \n"
 
-echo $(dirname ${snakemake_output['dir']})
-
+# echo $(dirname ${snakemake_output['dir']})
+mdkir -p ${downloadsDir}
 prefetch ${input} \
 --output-directory ${downloadsDir} \
 --progress \
@@ -35,3 +35,16 @@ prefetch ${input} \
 pwd
 ls
 
+cd ${downloadsDir}
+
+
+fasterq-dump --outdir ./${input} \
+    --temp ./${input} \
+    --threads ${snakemake[threads]} \
+    ${input}
+
+# Run fasterq dump 
+# fasterq-dump --outdir ${fastqDir} \
+# --temp ${downloadsDir} \
+# --threads ${snakemake[threads]} \
+# ${snakemake_input}

@@ -15,8 +15,8 @@ gcloud_docker = "docker://google/cloud-sdk:slim"
 rule all:
     input:
         # expand("input/{sra}.txt", sra=SRAlist),
-        # expand("downloads/{sra}/", sra=SRAlist)
-        expand("processed/{sra}", sra=SRAlist)
+        expand("downloads/{sra}/", sra=SRAlist)
+        # expand("processed/{sra}", sra=SRAlist)
         # dir=GS.remote(expand("ncbi-ccle-data/test/{sra}", sra=SRAlist))
 
 rule download_SRA:
@@ -24,9 +24,11 @@ rule download_SRA:
         "input/{sra}"
     output:
         # a file with the same name as the input file, but in the downloads directory
-        dir=directory("downloads/{sra}")
+        dir=directory("downloads/{sra}"),
+        fastq1="downloads/{sra}/{sra}_1.fastq",
+        fastq2="downloads/{sra}/{sra}_2.fastq"
     threads: 
-        1
+        4
     container:
         sra_docker
     script:
